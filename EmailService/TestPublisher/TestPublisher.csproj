@@ -51,7 +51,7 @@
     </Reference>
     <Reference Include="EmailModel, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\Models\EmailServiceModels\bin\Release\EmailModel.dll</HintPath>
+      <HintPath>..\..\..\Models\EmailServiceModels\bin\Debug\EmailModel.dll</HintPath>
     </Reference>
     <Reference Include="Spring.Aop, Version=2.0.1.45000, Culture=neutral, PublicKeyToken=65e474d141e25e07, processorArchitecture=MSIL">
       <HintPath>..\packages\Spring.Aop.2.0.1\lib\net45\Spring.Aop.dll</HintPath>

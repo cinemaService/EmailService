@@ -6,14 +6,16 @@ using System.Threading.Tasks;
 using System.Net;
 using System.Net.Mail;
 using EmailServiceModels;
+using AbstractService;
 
 namespace EmailListener
 {
-	class Sender
+	class Sender : IMessageEventHandler<Email>
 	{
-		public SmtpClient smtp;
+		SmtpClient smtp;
+		EmailService service;
 
-		public Sender()
+		public Sender(EmailService service)
 		{
 			smtp = new SmtpClient
 			{
@@ -24,9 +26,10 @@ namespace EmailListener
 				UseDefaultCredentials = false,
 				Credentials = new NetworkCredential(ServerSmtpCredits.ServerEmail, ServerSmtpCredits.ServerEmailPassword)
             };
+			this.service = service;
 		}
 
-		public void send(Email mail)
+		public void onMessage(Email mail)
 		{
 			using (var message = new MailMessage(ServerSmtpCredits.ServerEmail, mail.Receiver)
 			{
@@ -35,6 +38,8 @@ namespace EmailListener
 			})
 			{
 				smtp.Send(message);
+				string info = String.Format("Email has been sent to: {0}", mail.Receiver);
+				service.writeToLog(info);
 			}
 		}
 	}
